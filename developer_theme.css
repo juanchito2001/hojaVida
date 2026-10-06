@@ -1,58 +1,138 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --primary: #0f172a;
+    --secondary: #1e40af;
+    --accent: #2563eb;
+    --accent-light: #dbeafe;
+    --surface: #ffffff;
+    --background: #f8fafc;
+    --text: #1e293b;
+    --muted: #64748b;
+    --border: #e2e8f0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
 
 body {
     font-family: 'Inter', sans-serif;
+    background-color: var(--background);
+    color: var(--text);
 }
 
 .gradient-bg {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 55%, #2563eb 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.gradient-bg::before {
+    content: "";
+    position: absolute;
+    width: 420px;
+    height: 420px;
+    top: -180px;
+    right: -120px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.07);
+}
+
+.gradient-bg::after {
+    content: "";
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    bottom: -140px;
+    left: -80px;
+    border-radius: 50%;
+    background: rgba(96, 165, 250, 0.16);
+}
+
+.gradient-bg > div {
+    position: relative;
+    z-index: 1;
 }
 
 .card-hover {
-    transition: all 0.3s ease;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
 .card-hover:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    transform: translateY(-3px);
+    border-color: #bfdbfe;
+    box-shadow: 0 14px 28px rgba(15, 23, 42, 0.10);
 }
 
 .skill-bar {
     height: 8px;
-    background: linear-gradient(90deg, #4f46e5, #7c3aed);
-    border-radius: 4px;
-    animation: fillBar 2s ease-in-out;
-}
-
-@keyframes fillBar {
-    from { width: 0%; }
-    to { width: 100%; }
+    background: linear-gradient(90deg, #1d4ed8, #38bdf8);
+    border-radius: 999px;
+    animation: fillBar 1.2s ease-out;
 }
 
 .fade-in {
-    animation: fadeIn 0.8s ease-in-out;
-}
-
-@keyframes fadeIn {
-    from { 
-        opacity: 0; 
-        transform: translateY(20px); 
-    }
-    to { 
-        opacity: 1; 
-        transform: translateY(0); 
-    }
+    animation: fadeIn 0.6s ease-out both;
 }
 
 .floating {
-    animation: floating 3s ease-in-out infinite;
+    animation: floating 4s ease-in-out infinite;
+}
+
+a {
+    transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+a:hover {
+    opacity: 0.85;
+}
+
+::selection {
+    color: white;
+    background: #2563eb;
+}
+
+@keyframes fillBar {
+    from {
+        width: 0%;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes floating {
-    0%, 100% { 
-        transform: translateY(0px); 
+    0%,
+    100% {
+        transform: translateY(0);
     }
-    50% { 
-        transform: translateY(-10px); 
+    50% {
+        transform: translateY(-7px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
     }
 }
