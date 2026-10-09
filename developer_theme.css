@@ -1,209 +1,176 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
 
-:root {
-    --navy: #102a43;
-    --navy-deep: #081c2c;
-    --teal: #0f766e;
-    --teal-light: #ccfbf1;
-    --gold: #d4a017;
-    --ink: #243b53;
-    --muted: #627d98;
-    --paper: #ffffff;
-    --canvas: #f3f7fa;
-    --line: #d9e2ec;
+/* ==========================================
+   MENÚ DE NAVEGACIÓN PROFESIONAL
+   ========================================== */
+
+.quick-nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.92);
+    border-bottom: 1px solid rgba(16, 42, 67, 0.10);
+    box-shadow: 0 4px 18px rgba(16, 42, 67, 0.06);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition:
+        background 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+    animation: navEntrance 0.65s ease-out both;
 }
 
-* {
-    box-sizing: border-box;
+.quick-nav-inner {
+    max-width: 1200px;
+    min-height: 72px;
+    margin: 0 auto;
+    padding: 12px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
 }
+
+/* Nombre dentro del menú */
+
+.nav-brand {
+    flex-shrink: 0;
+    color: var(--navy) !important;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-decoration: none !important;
+    letter-spacing: -0.4px;
+    transition:
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.nav-brand:hover {
+    color: var(--teal) !important;
+    transform: translateY(-2px);
+}
+
+/* Opciones de navegación */
+
+.quick-nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.quick-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 13px;
+    border-radius: 10px;
+    color: var(--muted) !important;
+    font-size: 0.91rem;
+    font-weight: 600;
+    text-decoration: none !important;
+    white-space: nowrap;
+    transition:
+        color 0.25s ease,
+        background 0.25s ease,
+        transform 0.25s ease;
+}
+
+/* Línea animada bajo cada opción */
+
+.quick-link::after {
+    content: "";
+    position: absolute;
+    left: 13px;
+    right: 13px;
+    bottom: 5px;
+    height: 2px;
+    background: var(--teal);
+    border-radius: 10px;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.28s ease;
+}
+
+.quick-link:hover {
+    color: var(--teal) !important;
+    background: rgba(15, 118, 110, 0.07);
+    transform: translateY(-2px);
+}
+
+.quick-link:hover::after,
+.quick-link.active::after,
+.quick-link[aria-current="location"]::after {
+    transform: scaleX(1);
+}
+
+/* Opción correspondiente a la sección visible */
+
+.quick-link.active,
+.quick-link[aria-current="location"] {
+    color: var(--teal) !important;
+    background: rgba(15, 118, 110, 0.08);
+}
+
+/* Botón para volver al inicio */
+
+.nav-top {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(15, 118, 110, 0.18);
+    border-radius: 12px;
+    background: var(--teal);
+    color: white !important;
+    text-decoration: none !important;
+    box-shadow: 0 4px 12px rgba(15, 118, 110, 0.18);
+    transition:
+        background 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.25s ease;
+}
+
+.nav-top:hover {
+    background: var(--navy);
+    box-shadow: 0 7px 18px rgba(16, 42, 67, 0.22);
+    transform: translateY(-3px);
+}
+
+.nav-top i {
+    font-size: 0.95rem;
+    transition: transform 0.25s ease;
+}
+
+.nav-top:hover i {
+    transform: translateY(-2px);
+}
+
+/* Desplazamiento suave y espacio para el menú fijo */
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 90px;
 }
 
-body {
-    font-family: 'DM Sans', sans-serif;
-    background:
-        radial-gradient(circle at top right, rgba(20, 184, 166, 0.10), transparent 30%),
-        var(--canvas);
-    color: var(--ink);
+#perfil,
+#habilidades,
+#educacion,
+#experiencia,
+#proyectos {
+    scroll-margin-top: 90px;
 }
 
-/* Encabezado */
-.gradient-bg {
-    position: relative;
-    overflow: hidden;
-    background: linear-gradient(120deg, var(--navy-deep), var(--navy) 58%, #0d5c63) !important;
-    border-bottom: 4px solid var(--gold);
-}
+/* Entrada elegante del menú */
 
-.gradient-bg::before,
-.gradient-bg::after {
-    content: "";
-    position: absolute;
-    border-radius: 999px;
-    pointer-events: none;
-}
-
-.gradient-bg::before {
-    width: 360px;
-    height: 360px;
-    top: -230px;
-    right: -90px;
-    background: rgba(45, 212, 191, 0.14);
-}
-
-.gradient-bg::after {
-    width: 240px;
-    height: 240px;
-    bottom: -140px;
-    left: -80px;
-    background: rgba(212, 160, 23, 0.10);
-}
-
-.gradient-bg > div {
-    position: relative;
-    z-index: 1;
-}
-
-.gradient-bg h1 {
-    font-family: 'Playfair Display', serif;
-    font-weight: 700 !important;
-    letter-spacing: -0.7px;
-}
-
-.gradient-bg .floating {
-    background: rgba(255, 255, 255, 0.12) !important;
-    border: 1px solid rgba(255, 255, 255, 0.35);
-    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.22);
-}
-
-/* Tarjetas */
-.bg-white {
-    background: var(--paper) !important;
-}
-
-.card-hover {
-    border: 1px solid var(--line);
-    border-radius: 18px !important;
-    box-shadow: 0 8px 24px rgba(16, 42, 67, 0.07) !important;
-    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-}
-
-.card-hover:hover {
-    transform: translateY(-4px);
-    border-color: #8ddbd3;
-    box-shadow: 0 18px 34px rgba(16, 42, 67, 0.13) !important;
-}
-
-/* Encabezados de cada sección */
-h2.text-gray-800 {
-    color: var(--navy) !important;
-    font-family: 'Playfair Display', serif;
-    font-weight: 700 !important;
-    letter-spacing: -0.35px;
-    padding-bottom: 14px;
-    border-bottom: 1px solid var(--line);
-}
-
-h3.text-gray-700,
-h3.text-gray-800 {
-    color: var(--navy) !important;
-    font-weight: 700 !important;
-}
-
-.text-indigo-600,
-.text-purple-600,
-.text-green-600,
-.text-blue-600,
-.text-pink-600,
-.text-teal-600 {
-    color: var(--teal) !important;
-}
-
-.text-gray-600 {
-    color: var(--muted) !important;
-}
-
-.text-gray-700 {
-    color: var(--ink) !important;
-}
-
-/* Experiencia y líneas verticales */
-.border-indigo-500 {
-    border-color: var(--gold) !important;
-}
-
-.text-indigo-600.font-medium {
-    color: var(--teal) !important;
-}
-
-/* Etiquetas de habilidades */
-.rounded-full,
-.rounded-lg {
-    border: 1px solid rgba(16, 42, 67, 0.08);
-    font-weight: 600;
-}
-
-.bg-blue-100,
-.bg-indigo-100,
-.bg-cyan-100 {
-    background: #dff7f4 !important;
-    color: #0f5f5a !important;
-}
-
-.bg-purple-100,
-.bg-pink-100 {
-    background: #e9eef8 !important;
-    color: #36527c !important;
-}
-
-.bg-green-100 {
-    background: #e5f6ee !important;
-    color: #166534 !important;
-}
-
-.bg-orange-100,
-.bg-yellow-100 {
-    background: #fff3d8 !important;
-    color: #8a5611 !important;
-}
-
-.bg-gray-100 {
-    background: #edf2f7 !important;
-    color: #3b5168 !important;
-}
-
-/* Tarjetas de proyectos */
-.border-gray-200 {
-    border-color: var(--line) !important;
-}
-
-.hover\:border-indigo-300:hover {
-    border-color: #73cfc4 !important;
-    background: #f7fffe;
-}
-
-/* Pie de página */
-footer.bg-gray-800 {
-    background: var(--navy-deep) !important;
-    border-top: 4px solid var(--gold);
-}
-
-/* Animaciones suaves */
-.fade-in {
-    animation: fadeIn 0.55s ease-out both;
-}
-
-.floating {
-    animation: floating 4s ease-in-out infinite;
-}
-
-@keyframes fadeIn {
+@keyframes navEntrance {
     from {
         opacity: 0;
-        transform: translateY(14px);
+        transform: translateY(-12px);
     }
 
     to {
@@ -212,21 +179,106 @@ footer.bg-gray-800 {
     }
 }
 
-@keyframes floating {
-    0%,
-    100% {
-        transform: translateY(0);
+/* Animación al enfocar enlaces con teclado */
+
+.quick-link:focus-visible,
+.nav-brand:focus-visible,
+.nav-top:focus-visible {
+    outline: 3px solid var(--gold);
+    outline-offset: 3px;
+}
+
+/* ==========================================
+   DISEÑO RESPONSIVE PARA TABLET Y MÓVIL
+   ========================================== */
+
+@media (max-width: 900px) {
+    .quick-nav-inner {
+        min-height: 68px;
+        padding: 12px 18px;
+        gap: 12px;
     }
 
-    50% {
-        transform: translateY(-7px);
+    .quick-nav-links {
+        gap: 2px;
+    }
+
+    .quick-link {
+        padding: 9px 8px;
+        font-size: 0.83rem;
+    }
+
+    .quick-link::after {
+        left: 8px;
+        right: 8px;
+    }
+
+    .nav-brand {
+        font-size: 1.05rem;
     }
 }
 
+@media (max-width: 640px) {
+    .quick-nav-inner {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 12px 14px;
+    }
+
+    .nav-brand {
+        font-size: 1.1rem;
+    }
+
+    .nav-top {
+        width: 36px;
+        height: 36px;
+    }
+
+    .quick-nav-links {
+        order: 3;
+        flex-basis: 100%;
+        justify-content: flex-start;
+        gap: 5px;
+        padding: 2px 0 4px;
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        scrollbar-width: thin;
+        scrollbar-color: var(--teal) transparent;
+    }
+
+    .quick-link {
+        flex-shrink: 0;
+        padding: 9px 11px;
+        font-size: 0.82rem;
+    }
+
+    .quick-link::after {
+        left: 11px;
+        right: 11px;
+        bottom: 3px;
+    }
+
+    #perfil,
+    #habilidades,
+    #educacion,
+    #experiencia,
+    #proyectos {
+        scroll-margin-top: 125px;
+    }
+}
+
+/* Respeto por las preferencias de movimiento */
+
 @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .quick-nav,
+    .quick-nav *,
+    .quick-nav::before,
+    .quick-nav::after {
         animation: none !important;
         transition: none !important;
     }
